@@ -1,6 +1,7 @@
 package com.example.work4me_app
 
 import android.animation.ValueAnimator
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -14,6 +15,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import org.w3c.dom.Text
@@ -56,15 +58,21 @@ class LoginActivity : AppCompatActivity() {
     fun onClickSignIn(view:View){
         auth.signInWithEmailAndPassword(etEmail.text.toString(), etPassword.text.toString())
             .addOnCompleteListener(this) { task: Task<AuthResult> ->
+                println(task.exception)
                 if(task.isSuccessful){
                     Toast.makeText(this, "Signed In", Toast.LENGTH_LONG).show()
-
                 }else{
-                    if(task.isComplete ){
-
+                    if(task.exception!!.javaClass == FirebaseAuthInvalidCredentialsException::class.java){
+                        Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_LONG).show()
+                    }else if(task.exception!!.javaClass == FirebaseAuthInvalidUserException::class.java){
+                        Toast.makeText(this, "The user doesn`t exists", Toast.LENGTH_LONG).show()
                     }
                 }
             }
+    }
+
+    fun onTapHere(view: View){
+        startActivity(Intent(this, RegisterActivity::class.java))
     }
 
 }

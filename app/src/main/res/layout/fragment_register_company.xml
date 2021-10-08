@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="50dp"
+    tools:context=".RegisterCompanyFragment">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/textViewCompanyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="@string/company_name_input"
+            android:textColor="#616161"
+            android:textSize="22sp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <EditText
+            android:id="@+id/editTextCompanyName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            android:cursorVisible="true"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColor="@color/dark_font"
+            android:textCursorDrawable="@drawable/input_cursor"
+            android:textSize="22sp"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <View
+                android:id="@+id/viewBackCompanyName"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/dark_font" />
+
+            <View
+                android:id="@+id/viewBlueCompanyName"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/blue"
+                android:scaleX="0" />
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/textViewTin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="@string/tin_input"
+            android:textColor="#616161"
+            android:textSize="22sp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <EditText
+            android:id="@+id/editTextTin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            android:cursorVisible="true"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColor="@color/dark_font"
+            android:textCursorDrawable="@drawable/input_cursor"
+            android:textSize="22sp"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <View
+                android:id="@+id/viewBackTin"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/dark_font" />
+
+            <View
+                android:id="@+id/viewBluetin"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/blue"
+                android:scaleX="0" />
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/textViewCompanyNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="@string/Company_number_input"
+            android:textColor="#616161"
+            android:textSize="22sp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <EditText
+            android:id="@+id/editTextCompanyNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            android:cursorVisible="true"
+            android:importantForAutofill="no"
+            android:inputType="phone"
+            android:textColor="@color/dark_font"
+            android:textCursorDrawable="@drawable/input_cursor"
+            android:textSize="22sp"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <View
+                android:id="@+id/viewBackCompanyNumber"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/dark_font" />
+
+            <View
+                android:id="@+id/viewBlueCompanyNumber"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/blue"
+                android:scaleX="0" />
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/textViewLRName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="@string/lr_name_input"
+            android:textColor="#616161"
+            android:textSize="22sp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <EditText
+            android:id="@+id/editLRName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            android:cursorVisible="true"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColor="@color/dark_font"
+            android:textCursorDrawable="@drawable/input_cursor"
+            android:textSize="22sp"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <View
+                android:id="@+id/viewBackLRName"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/dark_font" />
+
+            <View
+                android:id="@+id/viewBlueLRName"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/blue"
+                android:scaleX="0" />
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/textViewLRLastName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="@string/lr_lastName_input"
+            android:textColor="#616161"
+            android:textSize="22sp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <EditText
+            android:id="@+id/editTextLRLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            android:cursorVisible="true"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColor="@color/dark_font"
+            android:textCursorDrawable="@drawable/input_cursor"
+            android:textSize="22sp"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <View
+                android:id="@+id/viewBackLRLastName"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/dark_font" />
+
+            <View
+                android:id="@+id/viewBlueLRLastName"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/blue"
+                android:scaleX="0" />
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/textViewCompanyEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="@string/company_email_input"
+            android:textColor="#616161"
+            android:textSize="22sp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <EditText
+            android:id="@+id/editTextCompanyEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            android:cursorVisible="true"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/dark_font"
+            android:textCursorDrawable="@drawable/input_cursor"
+            android:textSize="22sp"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <View
+                android:id="@+id/viewBackCompanyEmail"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/dark_font" />
+
+            <View
+                android:id="@+id/viewBlueCompanyEmail"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/blue"
+                android:scaleX="0" />
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/textViewPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="@string/password_input"
+            android:textColor="#616161"
+            android:textSize="22sp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            android:cursorVisible="true"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textColor="@color/dark_font"
+            android:textCursorDrawable="@drawable/input_cursor"
+            android:textSize="22sp"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <View
+                android:id="@+id/viewBackPassword"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/dark_font" />
+
+            <View
+                android:id="@+id/viewBluePassword"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/blue"
+                android:scaleX="0" />
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/textViewConfirmPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="@string/confirmPass_input"
+            android:textColor="#616161"
+            android:textSize="22sp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <EditText
+            android:id="@+id/editTextConfirmPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            android:cursorVisible="true"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textColor="@color/dark_font"
+            android:textCursorDrawable="@drawable/input_cursor"
+            android:textSize="22sp"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <View
+                android:id="@+id/viewBackConfirmPass"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/dark_font" />
+
+            <View
+                android:id="@+id/viewBlueConfirmPass"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/blue"
+                android:scaleX="0" />
+        </FrameLayout>
+
+    </FrameLayout>
+</LinearLayout>

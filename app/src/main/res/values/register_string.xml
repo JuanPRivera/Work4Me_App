@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">work4me</string>
     <string name="Register_text">Create your account</string>
+    
     <string name="name_input">Name</string>
     <string name="lastname_input">Lastname</string>
     <string name="id_input">Identification</string>
     <string name="city_input">City</string>
     <string name="birthday_input">Birthday DD/MM/YYYY</string>
     <string name="phone_input">Phone number</string>
+    
+    <string name="company_name_input">Company\'s Name</string>
+    <string name="tin_input">T.I.N</string>
+    <string name="Company_number_input">Company\'s Number</string>
+    <string name="lr_name_input">L.R Name</string>
+    <string name="lr_lastName_input">L.R Lastname</string>
+    <string name="company_email_input">Company\'s Email</string>
+    
     <string name="confirmPass_input">Confirmation Password</string>
+    
     <string name="signUp_button">Sign up</string>
+
+    <string name="company_button">Company</string>
+    <string name="applicant_button">Applicant</string>
 </resources>
