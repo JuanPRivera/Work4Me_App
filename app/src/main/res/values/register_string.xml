@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">work4me</string>
+    <string name="Register_text">Create your account</string>
+    <string name="name_input">Name</string>
+    <string name="lastname_input">Lastname</string>
+    <string name="id_input">Identification</string>
+    <string name="city_input">City</string>
+    <string name="birthday_input">Birthday DD/MM/YYYY</string>
+    <string name="phone_input">Phone number</string>
+    <string name="confirmPass_input">Confirmation Password</string>
+    <string name="signUp_button">Sign up</string>
+</resources>
