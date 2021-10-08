@@ -41,6 +41,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="start"
         android:layout_marginTop="40dp"
         android:text="@string/login_button"
         android:textColor="@color/white"
@@ -61,12 +62,13 @@
             android:textSize="22sp" />
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress"
+            android:id="@+id/editTextTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@android:color/transparent"
             android:inputType="textEmailAddress"
+            android:textColor="@color/dark_font"
             android:textSize="22sp"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -100,6 +102,7 @@
             android:layout_gravity="bottom"
             android:background="@android:color/transparent"
             android:inputType="textPassword"
+            android:textColor="@color/dark_font"
             android:textSize="22sp"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -139,13 +142,18 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="TextView" />
+        android:layout_marginTop="70dp"
+        android:text="@string/login_question"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="@string/tap_here"
+        android:textColor="@color/blue"
+        android:textSize="18sp"
+        tools:ignore="TextContrastCheck" />
 
 </LinearLayout>

@@ -3,6 +3,6 @@
     <string name="email_input">Email address</string>
     <string name="password_input">Password</string>
     <string name="login_button">Sign in</string>
-    <string name="login_question">Do you haven`t an account?</string>
+    <string name="login_question">Don`t you have an account?</string>
     <string name="tap_here">Tap here</string>
 </resources>
