@@ -1,13 +1,10 @@
 package com.example.work4me_app
 
 import android.animation.ValueAnimator
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.ListView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,13 +16,12 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import org.w3c.dom.Text
 
 class HomeApplicant : AppCompatActivity() {
 
-    private var _jobs : ArrayList<Job> = ArrayList<Job>();
-    private lateinit var recycler : RecyclerView ;
-    private lateinit var positionAnim : ValueAnimator;
+    private var _jobs : ArrayList<Job> = ArrayList<Job>()
+    private lateinit var recycler : RecyclerView
+    private lateinit var positionAnim : ValueAnimator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +49,7 @@ class HomeApplicant : AppCompatActivity() {
             .addSnapshotListener{ doc: DocumentSnapshot?, exception: FirebaseFirestoreException? ->
                 findViewById<TextView>(R.id.nameAppbar).text = doc!!["name"]
                     .toString()
-                    .replaceFirstChar { it.uppercase() };
+                    .replaceFirstChar { it.uppercase() }
             }
 
         recycler = findViewById<RecyclerView>(R.id.lvFeed)
