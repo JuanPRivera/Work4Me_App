@@ -4,8 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -20,6 +18,7 @@ class ApplicantFeedAdapter(context: Context, jobs: ArrayList<Job>) : RecyclerVie
         val jobCity : TextView = view.findViewById<TextView>(R.id.tvCity)
         val jobSalary : TextView = view.findViewById<TextView>(R.id.tvSalary)
         val jobDescription : TextView = view.findViewById<TextView>(R.id.tvDescription)
+        val companyName : TextView = view.findViewById<TextView>(R.id.tvCompanyName)
 
     }
 
@@ -39,29 +38,30 @@ class ApplicantFeedAdapter(context: Context, jobs: ArrayList<Job>) : RecyclerVie
         holder.jobCity.text = this._jobs[position].getCity()
         holder.jobSalary.text = formatPrice(this._jobs[position].getSalary())
         holder.jobDescription.text = this._jobs[position].getDescription()
+        holder.companyName.text = this._jobs[position].getCompany().getCompanyName()
     }
 
-    fun formatPrice(price:Int):String{
+    private fun formatPrice(price:Int):String{
 
-        var format : String = price.toString()
+        val format : String = price.toString()
 
-        var formated : String = "";
+        var formatted : String = "";
 
         for(i in format.indices){
 
             if (format.length > 3 && i == format.length-3){
-                formated += "."
+                formatted += "."
             }
             if (format.length > 6 && i == format.length-6){
-                formated += "'"
+                formatted += "'"
             }
 
-            formated += format[i]
+            formatted += format[i]
         }
 
-        formated = "$$formated"
+        formatted = "$$formatted"
 
-        return formated
+        return formatted
 
     }
 

@@ -8,4 +8,5 @@
     <string name="apply_btn">Apply</string>
 
     <string name="drawerTitle">Drawer Title</string>
+    <string name="profile">Name</string>
 </resources>
