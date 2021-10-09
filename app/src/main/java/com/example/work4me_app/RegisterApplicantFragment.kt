@@ -21,16 +21,6 @@ class RegisterApplicantFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var etName : EditText
-    private lateinit var etLastName : EditText
-    private lateinit var etId : EditText
-    private lateinit var etCity : EditText
-    private lateinit var etBirthday : EditText
-    private lateinit var etPhone : EditText
-    private lateinit var etEmail : EditText
-    private lateinit var etPassword : EditText
-    private lateinit var etConfirmPassword : EditText
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -45,16 +35,25 @@ class RegisterApplicantFragment : Fragment() {
     ): View? {
         val view : View = inflater.inflate(R.layout.fragment_register_applicant, container, false)
 
+        val etName : EditText = view.findViewById<EditText>(R.id.editTextName)
+        val etLastName : EditText = view.findViewById<EditText>(R.id.editTextLastname)
+        val etId : EditText = view.findViewById<EditText>(R.id.editTextId)
+        val etCity : EditText = view.findViewById<EditText>(R.id.editTextCity)
+        val etBirthday : EditText = view.findViewById<EditText>(R.id.editTextTextBirthday)
+        val etPhone : EditText = view.findViewById<EditText>(R.id.editTextPhone)
+        val etEmail : EditText = view.findViewById<EditText>(R.id.editTextTextEmail)
+        val etPassword : EditText = view.findViewById<EditText>(R.id.editTextPassword)
+        val etConfirmPassword : EditText = view.findViewById<EditText>(R.id.editTextConfirmPass)
 
-        etName = view.findViewById<EditText>(R.id.editTextName)
-        etLastName = view.findViewById<EditText>(R.id.editTextLastname)
-        etId = view.findViewById<EditText>(R.id.editTextId)
-        etCity = view.findViewById<EditText>(R.id.editTextCity)
-        etBirthday = view.findViewById<EditText>(R.id.editTextTextBirthday)
-        etPhone = view.findViewById<EditText>(R.id.editTextPhone)
-        etEmail = view.findViewById<EditText>(R.id.editTextTextEmail)
-        etPassword = view.findViewById<EditText>(R.id.editTextPassword)
-        etConfirmPassword = view.findViewById<EditText>(R.id.editTextConfirmPass)
+        InputAnimator.initializeAnimations(requireContext(), etName, view.findViewById(R.id.textViewName), view.findViewById(R.id.viewBlueName))
+        InputAnimator.initializeAnimations(requireContext(), etLastName, view.findViewById(R.id.textViewLastname), view.findViewById(R.id.viewBlueLastName))
+        InputAnimator.initializeAnimations(requireContext(), etId, view.findViewById(R.id.textViewId), view.findViewById(R.id.viewBlueId))
+        InputAnimator.initializeAnimations(requireContext(), etCity, view.findViewById(R.id.textViewCity), view.findViewById(R.id.viewBlueCity))
+        InputAnimator.initializeAnimations(requireContext(), etBirthday, view.findViewById(R.id.textViewBirthday), view.findViewById(R.id.viewBlueBirthday))
+        InputAnimator.initializeAnimations(requireContext(), etPhone, view.findViewById(R.id.textViewPhone), view.findViewById(R.id.viewBluePhone))
+        InputAnimator.initializeAnimations(requireContext(), etEmail, view.findViewById(R.id.textViewEmail), view.findViewById(R.id.viewBlueEmail))
+        InputAnimator.initializeAnimations(requireContext(), etPassword, view.findViewById(R.id.textViewPassword), view.findViewById(R.id.viewBluePassword))
+        InputAnimator.initializeAnimations(requireContext(), etConfirmPassword, view.findViewById(R.id.textViewConfirmPass), view.findViewById(R.id.viewBlueConfirmPass))
 
         // Inflate the layout for this fragment
         return view

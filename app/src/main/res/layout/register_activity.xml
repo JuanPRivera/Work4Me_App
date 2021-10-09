@@ -3,9 +3,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:scrollbars="none"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:tag="registerApplicant">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -91,12 +92,13 @@
 
         <ImageView
             android:id="@+id/signUpButton"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="70dp"
             android:clickable="true"
             android:contentDescription="@string/login_button"
+            android:onClick="onTapSignUp"
             app:srcCompat="@drawable/ic_sign_up_button" />
 
     </LinearLayout>

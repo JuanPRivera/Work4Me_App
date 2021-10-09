@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +35,27 @@ class RegisterCompanyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register_company, container, false)
+        val view : View = inflater.inflate(R.layout.fragment_register_company, container, false)
+
+        val etLRName: EditText = view.findViewById<EditText>(R.id.editTextLRName)
+        val etLRLastName: EditText = view.findViewById<EditText>(R.id.editTextLRLastName)
+        val etTin: EditText = view.findViewById<EditText>(R.id.editTextTin)
+        val etCompanyName: EditText = view.findViewById<EditText>(R.id.editTextCompanyName)
+        val etCompanyPhone: EditText = view.findViewById<EditText>(R.id.editTextCompanyNumber)
+        val etCompanyEmail: EditText = view.findViewById<EditText>(R.id.editTextCompanyEmail)
+        val etPassword: EditText = view.findViewById<EditText>(R.id.editTextPassword)
+        val etConfirmPassword: EditText = view.findViewById<EditText>(R.id.editTextConfirmPass)
+
+        InputAnimator.initializeAnimations(requireContext(), etLRName, view.findViewById(R.id.textViewLRName), view.findViewById(R.id.viewBlueLRName))
+        InputAnimator.initializeAnimations(requireContext(), etLRLastName, view.findViewById(R.id.textViewLRLastName), view.findViewById(R.id.viewBlueLRLastName))
+        InputAnimator.initializeAnimations(requireContext(), etTin, view.findViewById(R.id.textViewTin), view.findViewById(R.id.viewBluetin))
+        InputAnimator.initializeAnimations(requireContext(), etCompanyName, view.findViewById(R.id.textViewCompanyName), view.findViewById(R.id.viewBlueCompanyName))
+        InputAnimator.initializeAnimations(requireContext(), etCompanyPhone, view.findViewById(R.id.textViewCompanyNumber), view.findViewById(R.id.viewBlueCompanyNumber))
+        InputAnimator.initializeAnimations(requireContext(), etCompanyEmail, view.findViewById(R.id.textViewCompanyEmail), view.findViewById(R.id.viewBlueCompanyEmail))
+        InputAnimator.initializeAnimations(requireContext(), etPassword, view.findViewById(R.id.textViewPassword), view.findViewById(R.id.viewBluePassword))
+        InputAnimator.initializeAnimations(requireContext(), etConfirmPassword, view.findViewById(R.id.textViewConfirmPass), view.findViewById(R.id.viewBlueConfirmPass))
+
+        return view
     }
 
     companion object {

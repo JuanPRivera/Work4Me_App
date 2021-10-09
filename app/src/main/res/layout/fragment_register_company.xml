@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingHorizontal="50dp"
+    android:tag="registerCompany"
     tools:context=".RegisterCompanyFragment">
 
     <FrameLayout
@@ -176,7 +177,7 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <EditText
-            android:id="@+id/editLRName"
+            android:id="@+id/editTextLRName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
