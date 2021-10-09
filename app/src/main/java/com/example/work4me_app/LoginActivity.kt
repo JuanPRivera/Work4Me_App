@@ -38,8 +38,7 @@ class LoginActivity : AppCompatActivity() {
 
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            Toast.makeText(this, "Already signed in", Toast.LENGTH_LONG).show()
-            auth.signOut()
+            startActivity(Intent(this, HomeApplicant::class.java))
         }
 
         etEmail = findViewById<EditText>(R.id.editTextTextEmail)
@@ -60,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task: Task<AuthResult> ->
                 println(task.exception)
                 if(task.isSuccessful){
-                    Toast.makeText(this, "Signed In", Toast.LENGTH_LONG).show()
+                    startActivity(Intent(this, HomeApplicant::class.java))
                 }else{
                     if(task.exception!!.javaClass == FirebaseAuthInvalidCredentialsException::class.java){
                         Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_LONG).show()

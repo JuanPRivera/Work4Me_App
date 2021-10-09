@@ -3,5 +3,7 @@
     <color name="blue">#0256FA</color>
     <color name="dark_font">#616161</color>
     <color name="background">#111111</color>
+    <color name="backgroundVariant">#1E1E1E</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="borders">#3C3C3C</color>
 </resources>

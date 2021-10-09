@@ -80,27 +80,27 @@ class RegisterActivity : AppCompatActivity() {
         val currentFragment: Fragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as Fragment
 
-        var etPassword: EditText =
+        val etPassword: EditText =
             currentFragment.requireView().findViewById<EditText>(R.id.editTextPassword)
-        var etConfirmPassword: EditText =
+        val etConfirmPassword: EditText =
             currentFragment.requireView().findViewById<EditText>(R.id.editTextConfirmPass)
 
         if (etPassword.text.toString() == etConfirmPassword.text.toString()) {
 
             if (currentFragment is RegisterApplicantFragment) {
-                var etName: EditText =
+                val etName: EditText =
                     currentFragment.requireView().findViewById<EditText>(R.id.editTextName)
-                var etLastName: EditText =
+                val etLastName: EditText =
                     currentFragment.requireView().findViewById<EditText>(R.id.editTextLastname)
-                var etId: EditText =
+                val etId: EditText =
                     currentFragment.requireView().findViewById<EditText>(R.id.editTextId)
-                var etCity: EditText =
+                val etCity: EditText =
                     currentFragment.requireView().findViewById<EditText>(R.id.editTextCity)
-                var etBirthday: EditText =
+                val etBirthday: EditText =
                     currentFragment.requireView().findViewById<EditText>(R.id.editTextTextBirthday)
-                var etPhone: EditText =
+                val etPhone: EditText =
                     currentFragment.requireView().findViewById<EditText>(R.id.editTextPhone)
-                var etEmail: EditText =
+                val etEmail: EditText =
                     currentFragment.requireView().findViewById<EditText>(R.id.editTextTextEmail)
 
 
@@ -112,7 +112,7 @@ class RegisterActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             val currentUser: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
-                            var userData: HashMap<String, String> = hashMapOf(
+                            val userData: HashMap<String, String> = hashMapOf(
                                 "uid" to currentUser.uid,
                                 "id" to etId.text.toString(),
                                 "name" to etName.text.toString(),
@@ -141,17 +141,17 @@ class RegisterActivity : AppCompatActivity() {
 
             } else {
 
-                var etLRName: EditText =
+                val etLRName: EditText =
                     currentFragment.requireView().findViewById<EditText>(R.id.editTextLRName)
-                var etLRLastName: EditText =
+                val etLRLastName: EditText =
                     currentFragment.requireView().findViewById<EditText>(R.id.editTextLRLastName)
-                var etTin: EditText =
+                val etTin: EditText =
                     currentFragment.requireView().findViewById<EditText>(R.id.editTextTin)
-                var etCompanyName: EditText =
+                val etCompanyName: EditText =
                     currentFragment.requireView().findViewById<EditText>(R.id.editTextCompanyName)
-                var etCompanyPhone: EditText =
+                val etCompanyPhone: EditText =
                     currentFragment.requireView().findViewById<EditText>(R.id.editTextCompanyNumber)
-                var etCompanyEmail: EditText =
+                val etCompanyEmail: EditText =
                     currentFragment.requireView().findViewById<EditText>(R.id.editTextCompanyEmail)
 
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(
@@ -161,7 +161,7 @@ class RegisterActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             val currentUser: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
-                            var userData: HashMap<String, String> = hashMapOf(
+                            val userData: HashMap<String, String> = hashMapOf(
                                 "uid" to currentUser.uid,
                                 "tin" to etTin.text.toString(),
                                 "lrName" to etLRName.text.toString(),
