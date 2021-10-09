@@ -7,51 +7,62 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.EditText
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 
-class ApplicantFeedAdapter(context: Context, jobs: ArrayList<Job>) : BaseAdapter() {
+class ApplicantFeedAdapter(context: Context, jobs: ArrayList<Job>) : RecyclerView.Adapter<ApplicantFeedAdapter.ViewHolder>() {
 
     private var _context : Context = context
     private var _jobs : ArrayList<Job> = jobs
 
-    companion object{
-        private var inflater : LayoutInflater? = null;
-    }
+    class ViewHolder(view:View):RecyclerView.ViewHolder(view){
 
-    init {
-        inflater = _context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-    }
-
-    override fun getCount(): Int {
-        return this._jobs.size
-    }
-
-    override fun getItem(position: Int): Job {
-        return _jobs[position]
-    }
-
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-
-        var view : View? = convertView
-
-        if(view == null) {
-            view = inflater!!.inflate(R.layout.feed_applicant_item, null)
-        }
-
-        val jobTitle : TextView = view!!.findViewById<TextView>(R.id.tvJobTitle)
+        val jobTitle : TextView = view.findViewById<TextView>(R.id.tvJobTitle)
         val jobCity : TextView = view.findViewById<TextView>(R.id.tvCity)
         val jobSalary : TextView = view.findViewById<TextView>(R.id.tvSalary)
         val jobDescription : TextView = view.findViewById<TextView>(R.id.tvDescription)
 
-        jobTitle.text = this._jobs[position].getTitle()
-        jobCity.text = this._jobs[position].getCity()
-        jobSalary.text = this._jobs[position].getSalary().toString()
-        jobDescription.text = this._jobs[position].getDescription()
+    }
 
-        return view
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
+        val view : View = LayoutInflater.from(parent.context).inflate(R.layout.feed_applicant_item, parent, false)
+
+        return ViewHolder(view)
+    }
+
+    override fun getItemCount(): Int {
+        return this._jobs.size
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.jobTitle.text = this._jobs[position].getTitle()
+        holder.jobCity.text = this._jobs[position].getCity()
+        holder.jobSalary.text = formatPrice(this._jobs[position].getSalary())
+        holder.jobDescription.text = this._jobs[position].getDescription()
+    }
+
+    fun formatPrice(price:Int):String{
+
+        var format : String = price.toString()
+
+        var formated : String = "";
+
+        for(i in format.indices){
+
+            if (format.length > 3 && i == format.length-3){
+                formated += "."
+            }
+            if (format.length > 6 && i == format.length-6){
+                formated += "'"
+            }
+
+            formated += format[i]
+        }
+
+        formated = "$$formated"
+
+        return formated
+
     }
 
 }

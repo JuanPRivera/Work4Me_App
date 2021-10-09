@@ -3,6 +3,7 @@ package com.example.work4me_app
 import android.animation.ValueAnimator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.core.animation.doOnEnd
@@ -192,4 +193,5 @@ class RegisterActivity : AppCompatActivity() {
             Toast.makeText(this, "The passwords don't match", Toast.LENGTH_LONG).show()
         }
     }
+
 }

@@ -3,9 +3,12 @@ package com.example.work4me_app
 import android.animation.ValueAnimator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.ListView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -16,7 +19,7 @@ import com.google.firebase.ktx.Firebase
 class HomeApplicant : AppCompatActivity() {
 
     private var _jobs : ArrayList<Job> = ArrayList<Job>();
-    private lateinit var listView : ListView ;
+    private lateinit var recycler : RecyclerView ;
     private lateinit var positionAnim : ValueAnimator;
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,15 +32,16 @@ class HomeApplicant : AppCompatActivity() {
         positionAnim = ValueAnimator.ofFloat(-250f,0f)
         positionAnim.duration = 500
         positionAnim.addUpdateListener { newPos : ValueAnimator ->
-            println(drawer.translationX)
             drawer.translationX = Convertions.dpToPx(newPos.animatedValue as Float)
         }
 
         feed.setOnClickListener{
-            positionAnim.reverse()
+            if(drawer.translationX == 0f){
+                positionAnim.reverse()
+            }
         }
 
-        listView = findViewById(R.id.lvFeed)
+        recycler = findViewById<RecyclerView>(R.id.lvFeed)
 
         getData()
     }
@@ -64,7 +68,8 @@ class HomeApplicant : AppCompatActivity() {
                         }
                     }
                     val adapter : ApplicantFeedAdapter = ApplicantFeedAdapter(this, this._jobs)
-                    listView.adapter = adapter
+                    recycler.layoutManager = LinearLayoutManager(this)
+                    recycler.adapter = adapter
                 }
             }
     }
@@ -72,4 +77,5 @@ class HomeApplicant : AppCompatActivity() {
     fun showDrawer(view: View){
         positionAnim.start()
     }
+
 }
