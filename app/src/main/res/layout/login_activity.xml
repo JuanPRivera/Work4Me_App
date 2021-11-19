@@ -26,14 +26,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/login_button"
-            app:srcCompat="@drawable/w4mlogo" />
+            app:srcCompat="@drawable/ic_w4mlogo" />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:contentDescription="@string/login_button"
-            app:srcCompat="@drawable/w4mlogowords" />
+            app:srcCompat="@drawable/ic_w4mlogowords" />
 
     </LinearLayout>
 
@@ -41,6 +42,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="start"
         android:layout_marginTop="40dp"
         android:text="@string/login_button"
         android:textColor="@color/white"
@@ -48,8 +50,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="30dp">
+        android:layout_height="70dp"
+        android:layout_marginTop="15dp">
 
         <TextView
             android:id="@+id/textViewEmail"
@@ -58,31 +60,49 @@
             android:layout_gravity="bottom"
             android:text="@string/email_input"
             android:textColor="#616161"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress"
+            android:id="@+id/editTextTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@android:color/transparent"
+            android:cursorVisible="true"
+            android:importantForAutofill="no"
             android:inputType="textEmailAddress"
+            android:textColor="@color/dark_font"
+            android:textCursorDrawable="@drawable/input_cursor"
             android:textSize="22sp"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-        <View
-            android:id="@+id/view3"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_gravity="bottom"
-            android:background="@color/dark_font" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <View
+                android:id="@+id/viewBackEmail"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/dark_font" />
+
+            <View
+                android:id="@+id/viewBlueEmail"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/blue"
+                android:scaleX="0" />
+        </FrameLayout>
 
     </FrameLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="30dp">
+        android:layout_height="70dp"
+        android:layout_marginTop="15dp">
 
         <TextView
             android:id="@+id/textViewPassword"
@@ -99,53 +119,71 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@android:color/transparent"
+            android:cursorVisible="true"
+            android:importantForAutofill="no"
             android:inputType="textPassword"
+            android:textColor="@color/dark_font"
+            android:textCursorDrawable="@drawable/input_cursor"
             android:textSize="22sp"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-        <View
-            android:id="@+id/view4"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_gravity="bottom"
-            android:background="@color/dark_font" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <View
+                android:id="@+id/viewBackPassword"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/dark_font" />
+
+            <View
+                android:id="@+id/viewBluePassword"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/blue"
+                android:scaleX="0" />
+        </FrameLayout>
 
     </FrameLayout>
 
-    <FrameLayout
+    <ImageView
+        android:id="@+id/imageView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp">
+        android:layout_marginTop="70dp"
+        android:clickable="true"
+        android:contentDescription="@string/login_button"
+        android:onClick="onClickSignIn"
+        app:srcCompat="@drawable/sign_in_button" />
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_button" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/login_button"
-            android:textColor="@color/white"
-            android:textSize="26sp" />
-
-    </FrameLayout>
+    <View
+        android:id="@+id/view2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="TextView" />
+        android:text="@string/login_question"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/raised_ripple_effect"
+        android:clickable="true"
+        android:onClick="onTapHere"
+        android:text="@string/tap_here"
+        android:textColor="@color/blue"
+        android:textSize="18sp"
+        tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
 
 </LinearLayout>
