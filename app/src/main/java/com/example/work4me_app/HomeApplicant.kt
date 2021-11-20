@@ -30,6 +30,7 @@ class HomeApplicant : AppCompatActivity() {
     private lateinit var drawer : FrameLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_applicant)
 
@@ -90,6 +91,7 @@ class HomeApplicant : AppCompatActivity() {
                                             Company(company!!["companyName"].toString())
                                         )
                                     )
+
                                     if(i == (task.result!!.size()-1)){
                                         val adapter : ApplicantFeedAdapter = ApplicantFeedAdapter(this, this._jobs)
                                         recycler.layoutManager = LinearLayoutManager(this)
