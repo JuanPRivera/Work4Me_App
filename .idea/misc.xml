@@ -5,6 +5,9 @@
       <map>
         <entry key="..\:/Datos/Documentos/Universidad/Semestre IX/Aplicaciones Moviles/Work4Me_App/app/src/main/res/layout/activity_register.xml" value="0.36666666666666664" />
         <entry key="..\:/Datos/Documentos/Universidad/Semestre IX/Aplicaciones Moviles/Work4Me_App/app/src/main/res/layout/login_activity.xml" value="0.36666666666666664" />
+        <entry key="..\:/JUAN/UAO/8voSEMESTRE/Plataformas_moviles/Work4Me_App/app/src/main/res/layout/activity_home_applicant.xml" value="0.2957427536231884" />
+        <entry key="..\:/JUAN/UAO/8voSEMESTRE/Plataformas_moviles/Work4Me_App/app/src/main/res/layout/applicant_button.xml" value="0.2957427536231884" />
+        <entry key="..\:/JUAN/UAO/8voSEMESTRE/Plataformas_moviles/Work4Me_App/app/src/main/res/layout/feed_applicant_item.xml" value="0.2957427536231884" />
         <entry key="..\:/Universidad/DesarrolloMovil/Work4Me_App/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.15885416666666666" />
         <entry key="..\:/Universidad/DesarrolloMovil/Work4Me_App/app/src/main/res/drawable/ic_applicant_btn_disable.xml" value="0.2890625" />
         <entry key="..\:/Universidad/DesarrolloMovil/Work4Me_App/app/src/main/res/drawable/ic_button.xml" value="0.2890625" />
@@ -37,7 +40,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
