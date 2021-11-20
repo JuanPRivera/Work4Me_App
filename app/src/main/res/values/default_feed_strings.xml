@@ -7,6 +7,9 @@
     <string name="job_description">description</string>
     <string name="apply_btn">Apply</string>
 
-    <string name="drawerTitle">Drawer Title</string>
+    <string name="drawerTitle">WORk4ME</string>
     <string name="profile">Name</string>
+    <string name="Home">Home</string>
+    <string name="Applications">Applications</string>
+    <string name="Qr">QR Scanner</string>
 </resources>
