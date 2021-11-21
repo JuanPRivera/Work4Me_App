@@ -4,6 +4,7 @@ import android.animation.ValueAnimator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
@@ -17,7 +18,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.firestore
 import org.w3c.dom.Text
 
 class LoginActivity : AppCompatActivity() {
@@ -59,13 +65,30 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task: Task<AuthResult> ->
                 println(task.exception)
                 if(task.isSuccessful){
-                    startActivity(Intent(this, HomeApplicant::class.java))
+                    val user = auth.currentUser
+                    var uid = user?.uid.toString()
+                    start(uid)
+                    /*startActivity(Intent(this, HomeApplicant::class.java))*/
                 }else{
                     if(task.exception!!.javaClass == FirebaseAuthInvalidCredentialsException::class.java){
                         Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_LONG).show()
                     }else if(task.exception!!.javaClass == FirebaseAuthInvalidUserException::class.java){
                         Toast.makeText(this, "The user doesn`t exists", Toast.LENGTH_LONG).show()
                     }
+                }
+            }
+    }
+
+    private fun start(uid:String){
+        val db : FirebaseFirestore = Firebase.firestore
+        var type : String
+        db.collection("users")
+            .document(uid)
+            .get()
+            .addOnSuccessListener { doc: DocumentSnapshot ->
+                type = doc!!["type"].toString()
+                if(type.equals("applicant")){
+                    startActivity(Intent(this, HomeApplicant::class.java))
                 }
             }
     }
