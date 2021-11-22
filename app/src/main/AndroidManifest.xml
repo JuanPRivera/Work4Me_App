@@ -27,6 +27,15 @@
             android:name=".MapActivity"
             android:exported="false" />
         <activity
+            android:name=".HomeCompany"
+            android:exported="false" />
+        <activity
+            android:name=".profile_company"
+            android:exported="true" />
+        <activity
+            android:name=".profile_applicant"
+            android:exported="true" />
+        <activity
             android:name=".HomeApplicant"
             android:exported="true" />
         <activity
