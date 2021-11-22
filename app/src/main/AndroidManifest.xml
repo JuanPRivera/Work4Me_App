@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -19,6 +20,12 @@
         <activity
             android:name=".HomeCompany"
             android:exported="false" />
+        <activity
+            android:name=".profile_company"
+            android:exported="true" />
+        <activity
+            android:name=".profile_applicant"
+            android:exported="true" />
         <activity
             android:name=".HomeApplicant"
             android:exported="true" />

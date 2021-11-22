@@ -1,15 +1,20 @@
 package com.example.work4me_app
 
+import android.app.Dialog
 import android.content.Context
+import android.content.Intent
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ApplicantFeedAdapter(context: Context, jobs: ArrayList<Job>) : RecyclerView.Adapter<ApplicantFeedAdapter.ViewHolder>() {
+class ApplicantFeedAdapter(context: HomeApplicant, jobs: ArrayList<Job>) : RecyclerView.Adapter<ApplicantFeedAdapter.ViewHolder>() {
 
-    private var _context : Context = context
+    private var _context : HomeApplicant = context
     private var _jobs : ArrayList<Job> = jobs
 
     class ViewHolder(view:View):RecyclerView.ViewHolder(view){
@@ -19,6 +24,7 @@ class ApplicantFeedAdapter(context: Context, jobs: ArrayList<Job>) : RecyclerVie
         val jobSalary : TextView = view.findViewById<TextView>(R.id.tvSalary)
         val jobDescription : TextView = view.findViewById<TextView>(R.id.tvDescription)
         val companyName : TextView = view.findViewById<TextView>(R.id.tvCompanyName)
+        val applyButton : TextView = view.findViewById<TextView>(R.id.applyBtn)
 
     }
 
@@ -34,6 +40,11 @@ class ApplicantFeedAdapter(context: Context, jobs: ArrayList<Job>) : RecyclerVie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+        holder.applyButton.setOnClickListener {
+
+            showUploadCvDialog(this._jobs[position].getId())
+        }
         holder.jobTitle.text = this._jobs[position].getTitle()
         holder.jobCity.text = this._jobs[position].getCity()
         holder.jobSalary.text = formatPrice(this._jobs[position].getSalary())
@@ -63,6 +74,23 @@ class ApplicantFeedAdapter(context: Context, jobs: ArrayList<Job>) : RecyclerVie
 
         return formatted
 
+    }
+
+    private fun showUploadCvDialog(companyUid : String){
+        val dialog : Dialog = Dialog(_context)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.upload_application)
+
+        val browseBtn : ImageView = dialog.findViewById<ImageView>(R.id.browseCvBtn)
+
+        browseBtn.setOnClickListener{
+            val intent : Intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "application/pdf"
+            _context.startActivityForResult(intent, 1)
+        }
+
+        dialog.show()
     }
 
 }

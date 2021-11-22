@@ -73,10 +73,12 @@
             android:id="@+id/tvDescription"/>
 
         <TextView
+            android:id="@+id/applyBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/apply_btn"
             android:clickable="true"
+            android:focusable="true"
             android:background="@drawable/raised_ripple_effect"
             android:layout_gravity="end"
             android:layout_marginTop="10dp"/>
