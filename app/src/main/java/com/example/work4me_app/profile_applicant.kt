@@ -97,7 +97,7 @@ class profile_applicant : AppCompatActivity() {
         tvConfirmPass = findViewById<TextView>(R.id.textViewConfirmNewPassPrApp)
         viewConfirmPass = findViewById<View>(R.id.viewBlueConfirmNewPassPrApp)
 
-        setData()
+
         InputAnimator.initializeAnimations(this, etName, tvName, viewName)
         InputAnimator.initializeAnimations(this, etLastName, tvLastName, viewLastName)
         InputAnimator.initializeAnimations(this, etId, tvId, viewId)
@@ -107,7 +107,7 @@ class profile_applicant : AppCompatActivity() {
         InputAnimator.initializeAnimations(this, etEmail, tvEmail, viewEmail)
         InputAnimator.initializeAnimations(this, etNewPass, tvNewPass, viewNewPass)
         InputAnimator.initializeAnimations(this, etConfirmPass, tvConfirmPass, viewConfirmPass)
-
+        setData()
     }
 
     fun setData(){

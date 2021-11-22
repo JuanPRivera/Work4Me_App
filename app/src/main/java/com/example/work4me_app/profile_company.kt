@@ -92,28 +92,7 @@ class profile_company : AppCompatActivity() {
         InputAnimator.initializeAnimations(this, etLrLastnameCompany, tvLrLastnameCompany, viewLrLastnameCompany)
         InputAnimator.initializeAnimations(this, etEmailCompany, tvEmailCompany, viewEmailCompany)
         InputAnimator.initializeAnimations(this, etPassCompany, tvPassCompany, viewPassCompany)
-        InputAnimator.initializeAnimations(this, etConfirmPassCompany, tvConfirmPassCompany, viewConfirmPassCompany)
-
-    }
-
-    fun setData(){
-        db.collection("users")
-            .document(uid)
-            .get()
-            .addOnSuccessListener { doc: DocumentSnapshot ->
-                findViewById<EditText>(R.id.editTextNamePrApp).setText(doc!!["name"].toString())
-                findViewById<EditText>(R.id.editTextLastnamePrApp).setText(doc!!["lastName"].toString())
-                findViewById<EditText>(R.id.editTextIdPrApp).setText(doc!!["id"].toString())
-                findViewById<EditText>(R.id.editTextCityPrApp).setText(doc!!["city"].toString())
-                findViewById<EditText>(R.id.editTextBirthdayPrApp).setText(doc!!["birthday"].toString())
-                findViewById<EditText>(R.id.editTextPhonePrApp).setText(doc!!["phoneNumber"].toString())
-                findViewById<EditText>(R.id.editTextEmailPrApp).setText(doc!!["email"].toString())
-                findViewById<EditText>(R.id.editTextNewPassCompProf).setText(doc!!["password"].toString())
-                findViewById<EditText>(R.id.editTextConfirmNewPassPrComp).setText(doc!!["confirmPasswordCompany"].toString())
-        }
-
-    }
-        */
+        InputAnimator.initializeAnimations(this, etConfirmPassCompany, tvConfirmPassCompany, viewConfirmPassCompany)*/
 
     }
 
@@ -129,11 +108,10 @@ class profile_company : AppCompatActivity() {
                 findViewById<EditText>(R.id.editTextBirthdayPrApp).setText(doc!!["birthday"].toString())
                 findViewById<EditText>(R.id.editTextPhonePrApp).setText(doc!!["phoneNumber"].toString())
                 findViewById<EditText>(R.id.editTextEmailPrApp).setText(doc!!["email"].toString())
-                findViewById<EditText>(R.id.editTextPasswordPrApp).setText(doc!!["password"].toString())
-                findViewById<EditText>(R.id.editTextConfirmNewPassPrApp).setText(doc!!["confirmPassword"].toString())
-            }
+                findViewById<EditText>(R.id.editTextNewPassCompProf).setText(doc!!["password"].toString())
+                findViewById<EditText>(R.id.editTextConfirmNewPassPrComp).setText(doc!!["confirmPasswordCompany"].toString())
+        }
 
     }*/
 
-    }
 }
