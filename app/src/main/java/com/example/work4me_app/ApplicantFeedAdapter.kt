@@ -1,9 +1,7 @@
 package com.example.work4me_app
 
 import android.app.Dialog
-import android.content.Context
 import android.content.Intent
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -89,6 +87,8 @@ class ApplicantFeedAdapter(context: HomeApplicant, jobs: ArrayList<Job>) : Recyc
             intent.type = "application/pdf"
             _context.startActivityForResult(intent, 1)
         }
+
+
 
         dialog.show()
     }

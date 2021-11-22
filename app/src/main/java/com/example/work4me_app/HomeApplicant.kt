@@ -43,16 +43,17 @@ class HomeApplicant : AppCompatActivity() {
         }
 
         val qrButton : LinearLayout = findViewById<LinearLayout>(R.id.qrButton)
-        qrButton.setOnClickListener(
-            View.OnClickListener {
-                val integrator : IntentIntegrator = IntentIntegrator(this)
+        qrButton.setOnClickListener {
+                /*val integrator : IntentIntegrator = IntentIntegrator(this)
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
-                integrator.setPrompt("Coloca el código a la vista")
+                integrator.setPrompt("Place the code in the screen")
                 integrator.setCameraId(0)
                 integrator.setBeepEnabled(true)
-                integrator.initiateScan()
+                integrator.initiateScan()*/
+
+                startActivity(Intent(this, MapActivity::class.java))
             }
-        );
+
 
         val db : FirebaseFirestore = Firebase.firestore
 
@@ -115,7 +116,7 @@ class HomeApplicant : AppCompatActivity() {
 
         if(result != null){
             if(result.contents == null){
-                Toast.makeText(this, "Lectura Cancelada", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Code reader was cancel", Toast.LENGTH_SHORT).show()
             }else{
                 Toast.makeText(this, result.contents, Toast.LENGTH_SHORT).show()
             }
@@ -130,7 +131,6 @@ class HomeApplicant : AppCompatActivity() {
         drawer.isClickable = true
         drawer.isFocusable = true
         drawer.setOnClickListener{
-            print("click")
             if(drawer.translationX == 0f){
                 positionAnim.reverse()
                 drawer.isClickable = false
