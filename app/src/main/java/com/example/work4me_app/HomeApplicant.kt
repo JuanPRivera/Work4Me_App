@@ -144,4 +144,8 @@ class HomeApplicant : AppCompatActivity() {
         finish()
     }
 
+    fun getMyProfile(view : View){
+        startActivity(Intent(this, profile_applicant::class.java))
+    }
+
 }

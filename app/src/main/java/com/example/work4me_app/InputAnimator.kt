@@ -2,6 +2,7 @@ package com.example.work4me_app
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.FrameLayout
@@ -30,6 +31,13 @@ class InputAnimator {
                 (lb.layoutParams as FrameLayout.LayoutParams).apply {
                     setMargins(0,0,0,Convertions.dpToPx(move.animatedValue as Int))
                 }
+            }
+
+            Log.d("isempty", et.text.toString())
+            if(!et.text.isEmpty()){
+
+                lb.setTextColor(ContextCompat.getColor(context, R.color.dark_font))
+                scaleAnimation.start()
             }
 
             et.onFocusChangeListener = View.OnFocusChangeListener(){ view: View, isFocused: Boolean ->
