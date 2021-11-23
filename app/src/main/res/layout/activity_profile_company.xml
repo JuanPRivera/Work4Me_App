@@ -368,6 +368,7 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/confirmGroup"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="15dp">
@@ -419,6 +420,7 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/passwordGroup"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="15dp">

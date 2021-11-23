@@ -3,7 +3,21 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter() // Warning: this repository is going to shut down soon
+        maven {
+
+            url 'https://api.mapbox.com/downloads/v2/releases/maven'
+            authentication {
+                basic(BasicAuthentication)
+            }
+            credentials {
+                // Do not change the username below.
+                // This should always be `mapbox` (not your username).
+                username = 'mapbox'
+                // Use the secret token you stored in gradle.properties as the password
+                password = "sk.eyJ1IjoibWFydGluYWxlMTQiLCJhIjoiY2t3OWVzejEzMjgxdzJ1bXB5Y3Y2dHIxZCJ9.ghGydus1-litB8YD1IkaLQ"
+            }
+        }
+        // Warning: this repository is going to shut down soon
     }
 }
 rootProject.name = "work4me_App"

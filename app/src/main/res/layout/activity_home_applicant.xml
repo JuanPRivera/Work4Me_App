@@ -22,6 +22,7 @@
             android:paddingHorizontal="10dp">
 
             <ImageView
+                android:id="@+id/profilePicture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_drawer_btn"
@@ -42,6 +43,7 @@
                 android:id="@+id/nameAppbar"/>
 
             <ImageView
+                android:id="@+id/userPreview"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:background="@drawable/user_preview"

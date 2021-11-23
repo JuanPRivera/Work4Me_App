@@ -1,26 +1,33 @@
 package com.example.work4me_app
 
 import android.animation.ValueAnimator
+import android.app.Activity
 import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
+import com.mapbox.navigation.ui.utils.internal.extensions.getBitmap
+import java.io.InputStream
+import java.net.URL
 
 class HomeApplicant : AppCompatActivity() {
 
@@ -43,16 +50,17 @@ class HomeApplicant : AppCompatActivity() {
         }
 
         val qrButton : LinearLayout = findViewById<LinearLayout>(R.id.qrButton)
-        qrButton.setOnClickListener(
-            View.OnClickListener {
+        qrButton.setOnClickListener {
                 val integrator : IntentIntegrator = IntentIntegrator(this)
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
-                integrator.setPrompt("Coloca el código a la vista")
+                integrator.setPrompt("Place the code in the screen")
                 integrator.setCameraId(0)
                 integrator.setBeepEnabled(true)
                 integrator.initiateScan()
+
+                //startActivity(Intent(this, MapActivity::class.java))
             }
-        );
+
 
         val db : FirebaseFirestore = Firebase.firestore
 
@@ -62,6 +70,20 @@ class HomeApplicant : AppCompatActivity() {
                 findViewById<TextView>(R.id.nameAppbar).text = doc!!["name"]
                     .toString()
                     .replaceFirstChar { it.uppercase() }
+
+                if(doc["profile_picture"] != null){
+                    AsyncTask.execute {
+                        val url: URL = URL(doc["profile_picture"].toString())
+
+                        val content: InputStream = url.content as InputStream
+                        val drawable: Drawable = Drawable.createFromStream(content, "src")
+
+                        runOnUiThread {
+
+                            findViewById<ImageView>(R.id.userPreview).setImageDrawable(BitmapDrawable(Convertions.getRoundedCroppedBitmap(drawable.getBitmap())))
+                        }
+                    }
+                }
             }
 
         recycler = findViewById<RecyclerView>(R.id.lvFeed)
@@ -88,7 +110,7 @@ class HomeApplicant : AppCompatActivity() {
                                             doc["job"].toString(),
                                             doc["description"].toString(),
                                             doc["salary"].toString().toInt(),
-                                            Company(company!!["companyName"].toString())
+                                            Company(company!!["companyName"].toString(), company!!["companyUid"].toString())
                                         )
                                     )
 
@@ -105,23 +127,64 @@ class HomeApplicant : AppCompatActivity() {
             }
     }
 
-    private fun getApplications () {
-
-    }
-
 
     override fun onActivityResult(requestCode : Int, resultCode : Int, data : Intent?){
-        val result : IntentResult? = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
 
-        if(result != null){
-            if(result.contents == null){
-                Toast.makeText(this, "Lectura Cancelada", Toast.LENGTH_SHORT).show()
-            }else{
-                Toast.makeText(this, result.contents, Toast.LENGTH_SHORT).show()
-            }
+        if(requestCode == 2){
+
+            Log.d("companyUidNew", "${data?.getStringExtra("companyUid")}")
+
+            val application = hashMapOf(
+                "applicant_uid" to FirebaseAuth.getInstance().currentUser!!.uid,
+                "company_uid" to data?.getStringExtra("companyUid"),
+                "application_data" to hashMapOf("status" to "")
+            )
+
+            FirebaseFirestore
+                .getInstance()
+                .collection("applications")
+                .add(application)
+                .addOnSuccessListener { doc : DocumentReference ->
+                    val uri : Uri? = data?.data;
+
+                    val cvsReference : StorageReference = FirebaseStorage.getInstance().reference.child("cvs/${doc.id}")
+
+                    val uploadTask : UploadTask = cvsReference.putFile(uri!!)
+
+                    uploadTask.addOnSuccessListener{ _: UploadTask.TaskSnapshot ->
+                        cvsReference.downloadUrl.addOnSuccessListener { uri : Uri ->
+
+                            doc.set(hashMapOf(
+                                "application_data" to hashMapOf(
+                                    "status" to "",
+                                    "cv" to uri.toString()
+                                )), SetOptions.merge())
+                        }
+                    }
+                }
+
+
+
         }else{
-            super.onActivityResult(requestCode, resultCode, data)
+            val result : IntentResult? = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+            if(result != null){
+
+                if(result.contents == null){
+                    Toast.makeText(this, "Code reader was cancel", Toast.LENGTH_SHORT).show()
+                }else{
+
+                    val intent : Intent = Intent(this, profile_company::class.java)
+                    intent.putExtra("companyUid", result.contents.toString())
+                    startActivity(intent)
+                }
+            }else{
+                Toast.makeText(this, "empty", Toast.LENGTH_SHORT).show()
+
+            }
         }
+
+
 
     }
 
@@ -130,7 +193,6 @@ class HomeApplicant : AppCompatActivity() {
         drawer.isClickable = true
         drawer.isFocusable = true
         drawer.setOnClickListener{
-            print("click")
             if(drawer.translationX == 0f){
                 positionAnim.reverse()
                 drawer.isClickable = false

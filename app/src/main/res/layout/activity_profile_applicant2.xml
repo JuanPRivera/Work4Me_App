@@ -37,13 +37,14 @@
                 app:srcCompat="@drawable/arrow" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/profilePicture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:contentDescription="@string/login_button"
-                app:srcCompat="@drawable/imageuser" />
+                app:srcCompat="@drawable/imageuser"
+                />
         </FrameLayout>
 
         <TextView
@@ -54,15 +55,6 @@
             android:text="My profile"
             android:textColor="@color/white"
             android:textSize="28sp" />
-
-        <ImageView
-            android:id="@+id/activeBgPrApp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/ic_tab_active"
-            tools:srcCompat="@drawable/ic_applicant_btn_active" />
 
         <FrameLayout
             android:layout_width="match_parent"

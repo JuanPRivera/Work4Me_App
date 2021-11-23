@@ -37,10 +37,12 @@ class InputAnimator {
             if(!et.text.isEmpty()){
 
                 lb.setTextColor(ContextCompat.getColor(context, R.color.dark_font))
-                scaleAnimation.start()
+                sizeEmailAnimator.start()
+                moveEmailAnimator.start()
+
             }
 
-            et.onFocusChangeListener = View.OnFocusChangeListener(){ view: View, isFocused: Boolean ->
+            et.onFocusChangeListener = View.OnFocusChangeListener(){ _: View, isFocused: Boolean ->
                 if(isFocused){
                     lb.setTextColor(ContextCompat.getColor(context, R.color.blue))
                     scaleAnimation.start()

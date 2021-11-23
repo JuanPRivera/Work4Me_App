@@ -1,16 +1,21 @@
 package com.example.work4me_app
 
 import android.app.Dialog
-import android.content.Context
 import android.content.Intent
-import android.media.Image
+import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import android.os.Bundle
+
+
+
 
 class ApplicantFeedAdapter(context: HomeApplicant, jobs: ArrayList<Job>) : RecyclerView.Adapter<ApplicantFeedAdapter.ViewHolder>() {
 
@@ -43,7 +48,7 @@ class ApplicantFeedAdapter(context: HomeApplicant, jobs: ArrayList<Job>) : Recyc
 
         holder.applyButton.setOnClickListener {
 
-            showUploadCvDialog(this._jobs[position].getId())
+            showUploadCvDialog(this._jobs[position].getCompany().getCompanyUid())
         }
         holder.jobTitle.text = this._jobs[position].getTitle()
         holder.jobCity.text = this._jobs[position].getCity()
@@ -77,20 +82,29 @@ class ApplicantFeedAdapter(context: HomeApplicant, jobs: ArrayList<Job>) : Recyc
     }
 
     private fun showUploadCvDialog(companyUid : String){
+
         val dialog : Dialog = Dialog(_context)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(true)
+
         dialog.setContentView(R.layout.upload_application)
 
         val browseBtn : ImageView = dialog.findViewById<ImageView>(R.id.browseCvBtn)
 
         browseBtn.setOnClickListener{
-            val intent : Intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.type = "application/pdf"
-            _context.startActivityForResult(intent, 1)
+            val intent : Intent = Intent(_context, FileIntermidiateActivity::class.java)
+            intent.putExtra("companyUid", companyUid)
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            _context.startActivityForResult(intent, 2)
+
         }
+
+
 
         dialog.show()
     }
+
+
 
 }

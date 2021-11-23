@@ -2,16 +2,26 @@ package com.example.work4me_app
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.*
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.work4me_app.Convertions.Companion.getRoundedCroppedBitmap
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
+import com.mapbox.navigation.ui.utils.internal.extensions.getBitmap
+import java.io.InputStream
+import java.net.URL
+
 
 class profile_applicant : AppCompatActivity() {
 
@@ -56,6 +66,8 @@ class profile_applicant : AppCompatActivity() {
     private lateinit var tvConfirmPass : TextView
     private lateinit var viewConfirmPass : View
 
+    private lateinit var profileImage : ImageView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,16 +109,8 @@ class profile_applicant : AppCompatActivity() {
         tvConfirmPass = findViewById<TextView>(R.id.textViewConfirmNewPassPrApp)
         viewConfirmPass = findViewById<View>(R.id.viewBlueConfirmNewPassPrApp)
 
+        profileImage = findViewById<ImageView>(R.id.profilePicture)
 
-        InputAnimator.initializeAnimations(this, etName, tvName, viewName)
-        InputAnimator.initializeAnimations(this, etLastName, tvLastName, viewLastName)
-        InputAnimator.initializeAnimations(this, etId, tvId, viewId)
-        InputAnimator.initializeAnimations(this, etCity, tvCity, viewCity)
-        InputAnimator.initializeAnimations(this, etBirthday, tvBirthday, viewBirthday)
-        InputAnimator.initializeAnimations(this, etPhone, tvPhone, viewPhone)
-        InputAnimator.initializeAnimations(this, etEmail, tvEmail, viewEmail)
-        InputAnimator.initializeAnimations(this, etNewPass, tvNewPass, viewNewPass)
-        InputAnimator.initializeAnimations(this, etConfirmPass, tvConfirmPass, viewConfirmPass)
         setData()
     }
 
@@ -115,15 +119,69 @@ class profile_applicant : AppCompatActivity() {
             .document(uid)
             .get()
             .addOnSuccessListener { doc: DocumentSnapshot ->
-                findViewById<EditText>(R.id.editTextNamePrApp).setText(doc!!["name"].toString())
-                findViewById<EditText>(R.id.editTextLastnamePrApp).setText(doc!!["lastName"].toString())
-                findViewById<EditText>(R.id.editTextIdPrApp).setText(doc!!["id"].toString())
-                findViewById<EditText>(R.id.editTextCityPrApp).setText(doc!!["city"].toString())
-                findViewById<EditText>(R.id.editTextBirthdayPrApp).setText(doc!!["birthday"].toString())
-                findViewById<EditText>(R.id.editTextPhonePrApp).setText(doc!!["phoneNumber"].toString())
-                findViewById<EditText>(R.id.editTextEmailPrApp).setText(doc!!["email"].toString())
-                findViewById<EditText>(R.id.editTextPasswordPrApp).setText(doc!!["password"].toString())
-                findViewById<EditText>(R.id.editTextConfirmNewPassPrApp).setText(doc!!["confirmPassword"].toString())
+                findViewById<EditText>(R.id.editTextNamePrApp)
+                    .apply {
+                        setText(doc!!["name"].toString())
+                        isEnabled = false
+                    }
+
+                findViewById<EditText>(R.id.editTextLastnamePrApp)
+                    .apply {
+                        setText(doc!!["lastName"].toString())
+                        isEnabled = false
+                    }
+
+                findViewById<EditText>(R.id.editTextIdPrApp)
+                    .apply {
+                        setText(doc!!["id"].toString())
+                        isEnabled = false
+                    }
+                findViewById<EditText>(R.id.editTextCityPrApp)
+                    .apply {
+                        setText(doc!!["city"].toString())
+                        isEnabled = false
+                    }
+                findViewById<EditText>(R.id.editTextBirthdayPrApp)
+                    .apply {
+                        setText(doc!!["birthday"].toString())
+                        isEnabled = false
+                    }
+                findViewById<EditText>(R.id.editTextPhonePrApp)
+                    .apply {
+                        setText(doc!!["phoneNumber"].toString())
+                        isEnabled = false
+                    }
+                findViewById<EditText>(R.id.editTextEmailPrApp)
+                    .apply {
+                        setText(auth.currentUser!!.email)
+                        isEnabled = false
+                    }
+
+                if(doc!!["profile_picture"] != null){
+                    AsyncTask.execute {
+                        val url: URL = URL(doc!!["profile_picture"].toString())
+
+                        val content: InputStream = url.content as InputStream
+                        val drawable: Drawable = Drawable.createFromStream(content, "src")
+
+                        runOnUiThread {
+                            profileImage.setImageDrawable(BitmapDrawable(Convertions.getRoundedCroppedBitmap(drawable.getBitmap())))
+                        }
+                    }
+                }
+
+
+
+
+                InputAnimator.initializeAnimations(this, etName, tvName, viewName)
+                InputAnimator.initializeAnimations(this, etLastName, tvLastName, viewLastName)
+                InputAnimator.initializeAnimations(this, etId, tvId, viewId)
+                InputAnimator.initializeAnimations(this, etCity, tvCity, viewCity)
+                InputAnimator.initializeAnimations(this, etBirthday, tvBirthday, viewBirthday)
+                InputAnimator.initializeAnimations(this, etPhone, tvPhone, viewPhone)
+                InputAnimator.initializeAnimations(this, etEmail, tvEmail, viewEmail)
+                InputAnimator.initializeAnimations(this, etNewPass, tvNewPass, viewNewPass)
+                InputAnimator.initializeAnimations(this, etConfirmPass, tvConfirmPass, viewConfirmPass)
         }
 
     }
@@ -133,9 +191,6 @@ class profile_applicant : AppCompatActivity() {
     }
 
     fun onTapUpdate(view: View){
-        db.collection("users").whereEqualTo("uid", auth.currentUser!!.uid).get().addOnSuccessListener {
-            documents : QuerySnapshot->
-
-        }
+        //if(et)
     }
 }
