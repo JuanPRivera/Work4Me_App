@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">work4me</string>
     <string name="email_input">Email address</string>
     <string name="password_input">Password</string>
     <string name="login_button">Sign in</string>

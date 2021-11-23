@@ -48,9 +48,7 @@ class LoginActivity : AppCompatActivity() {
                 return@OnCompleteListener
             }
 
-
             Log.d("token", task.result)
-            Toast.makeText(baseContext, R.string.msg_token_fmt, Toast.LENGTH_SHORT).show()
         })
 
         auth = Firebase.auth
