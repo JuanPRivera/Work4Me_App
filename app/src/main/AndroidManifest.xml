@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Work4me_App"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".status_jobs_applicant"
+            android:exported="true" />
+        <activity
             android:name=".profile_company"
             android:exported="true" />
         <activity
