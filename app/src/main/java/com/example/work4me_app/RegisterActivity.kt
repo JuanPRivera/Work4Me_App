@@ -1,6 +1,7 @@
 package com.example.work4me_app
 
 import android.animation.ValueAnimator
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
@@ -17,6 +18,8 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -121,13 +124,19 @@ class RegisterActivity : AppCompatActivity() {
                                 "city" to etCity.text.toString(),
                                 "birthday" to etBirthday.text.toString(),
                                 "phoneNumber" to etPhone.text.toString(),
+                                "email" to etEmail.text.toString(),
                                 "type" to "applicant"
                             )
 
                             val db : FirebaseFirestore = Firebase.firestore
                             db.collection("users").document(userData["uid"]!!)
                                 .set(userData)
-                                .addOnSuccessListener { Toast.makeText(this, "User Created Successfully", Toast.LENGTH_LONG).show() }
+                                .addOnSuccessListener {
+                                    Toast.makeText(this, "User Created Successfully", Toast.LENGTH_LONG).show()
+                                    val user = Firebase.auth.currentUser
+                                    var uid = user?.uid.toString()
+                                    start(uid)
+                                }
                                 .addOnFailureListener { Toast.makeText(this, "Database error", Toast.LENGTH_LONG).show() }
 
                         } else {
@@ -169,13 +178,19 @@ class RegisterActivity : AppCompatActivity() {
                                 "lrLastName" to etLRLastName.text.toString(),
                                 "companyName" to etCompanyName.text.toString(),
                                 "phoneNumber" to etCompanyPhone.text.toString(),
+                                "email" to etCompanyEmail.text.toString(),
                                 "type" to "company"
                             )
 
                             val db : FirebaseFirestore = Firebase.firestore
                             db.collection("users").document(userData["uid"]!!)
                                 .set(userData)
-                                .addOnSuccessListener { Toast.makeText(this, "User Created Successfully", Toast.LENGTH_LONG).show() }
+                                .addOnSuccessListener {
+                                    Toast.makeText(this, "User Created Successfully", Toast.LENGTH_LONG).show()
+                                    val user = Firebase.auth.currentUser
+                                    var uid = user?.uid.toString()
+                                    start(uid)
+                                }
                                 .addOnFailureListener { Toast.makeText(this, "Database error", Toast.LENGTH_LONG).show() }
 
 
@@ -192,6 +207,21 @@ class RegisterActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "The passwords don't match", Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun start(uid:String){
+        val db : FirebaseFirestore = Firebase.firestore
+        var type : String
+        db.collection("users")
+            .document(uid)
+            .get()
+            .addOnSuccessListener { doc: DocumentSnapshot ->
+                type = doc!!["type"].toString()
+                if(type.equals("applicant")){
+                    startActivity(Intent(this, HomeApplicant::class.java))
+                    finish()
+                }
+            }
     }
 
 }

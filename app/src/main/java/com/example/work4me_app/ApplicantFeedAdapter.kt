@@ -60,7 +60,7 @@ class ApplicantFeedAdapter(context: HomeApplicant, jobs: ArrayList<Job>) : Recyc
         holder.jobSalary.text = formatPrice(this._jobs[position].getSalary())
         holder.jobDescription.text = this._jobs[position].getDescription()
         holder.companyName.text = this._jobs[position].getCompany().getCompanyName()
-        if(this._jobs[position].getCompany().getPictureUrl() != null){
+        if(this._jobs[position].getCompany().getPictureUrl() != null && this._jobs[position].getCompany().getPictureUrl() != "null"){
             AsyncTask.execute {
                 val url: URL = URL(this._jobs[position].getCompany().getPictureUrl())
 

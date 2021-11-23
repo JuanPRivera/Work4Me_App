@@ -100,6 +100,7 @@ class LoginActivity : AppCompatActivity() {
                 type = doc!!["type"].toString()
                 if(type.equals("applicant")){
                     startActivity(Intent(this, HomeApplicant::class.java))
+                    finish()
                 }
             }
     }
