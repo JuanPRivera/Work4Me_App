@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
 
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            startActivity(Intent(this, HomeApplicant::class.java))
+            start(currentUser.uid)
         }
 
         etEmail = findViewById<EditText>(R.id.editTextTextEmail)
@@ -87,8 +87,12 @@ class LoginActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { doc: DocumentSnapshot ->
                 type = doc!!["type"].toString()
-                if(type.equals("applicant")){
+                if(type == "applicant"){
+                    println("HomeApplicant")
                     startActivity(Intent(this, HomeApplicant::class.java))
+                }else{
+                    println("HomeCompany")
+                    startActivity(Intent(this, HomeCompany::class.java))
                 }
             }
     }
