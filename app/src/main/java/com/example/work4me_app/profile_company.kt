@@ -3,11 +3,13 @@ package com.example.work4me_app
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
-import android.widget.TextView
+import android.view.ViewGroup
+import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 class profile_company : AppCompatActivity() {
 
@@ -84,34 +86,108 @@ class profile_company : AppCompatActivity() {
         tvConfirmPassCompany = findViewById<TextView>(R.id.textViewConfirmNewPassPrComp)
         viewConfirmPassCompany = findViewById<View>(R.id.viewBluePassword)
 
-        /*setData()
-        InputAnimator.initializeAnimations(this, etNameCompany, tvNameCompany, viewNameCompany)
-        InputAnimator.initializeAnimations(this, etNit, tvNit, viewNit)
-        InputAnimator.initializeAnimations(this, etNumberCompany, tvNumberCompany, viewNumberCompany)
-        InputAnimator.initializeAnimations(this, etLrNameCompany, tvLrNameCompany, viewLrNameCompany)
-        InputAnimator.initializeAnimations(this, etLrLastnameCompany, tvLrLastnameCompany, viewLrLastnameCompany)
-        InputAnimator.initializeAnimations(this, etEmailCompany, tvEmailCompany, viewEmailCompany)
-        InputAnimator.initializeAnimations(this, etPassCompany, tvPassCompany, viewPassCompany)
-        InputAnimator.initializeAnimations(this, etConfirmPassCompany, tvConfirmPassCompany, viewConfirmPassCompany)*/
+        if(intent.getStringExtra("companyUid") != null){
+            setData(intent.getStringExtra("companyUid").toString())
+        }
+
+
 
     }
 
-    /*fun setData(){
+    fun setData(uid : String?) {
+
+        val search: String = uid ?: Firebase.auth.currentUser!!.uid
+
+
         db.collection("users")
-            .document(uid)
+            .document(search)
             .get()
             .addOnSuccessListener { doc: DocumentSnapshot ->
-                findViewById<EditText>(R.id.editTextNamePrApp).setText(doc!!["name"].toString())
-                findViewById<EditText>(R.id.editTextLastnamePrApp).setText(doc!!["lastName"].toString())
-                findViewById<EditText>(R.id.editTextIdPrApp).setText(doc!!["id"].toString())
-                findViewById<EditText>(R.id.editTextCityPrApp).setText(doc!!["city"].toString())
-                findViewById<EditText>(R.id.editTextBirthdayPrApp).setText(doc!!["birthday"].toString())
-                findViewById<EditText>(R.id.editTextPhonePrApp).setText(doc!!["phoneNumber"].toString())
-                findViewById<EditText>(R.id.editTextEmailPrApp).setText(doc!!["email"].toString())
-                findViewById<EditText>(R.id.editTextNewPassCompProf).setText(doc!!["password"].toString())
-                findViewById<EditText>(R.id.editTextConfirmNewPassPrComp).setText(doc!!["confirmPasswordCompany"].toString())
-        }
+                etNameCompany
+                    .apply {
+                        setText(doc["companyName"]!!.toString())
+                        isEnabled = false
+                    }
 
-    }*/
+                etNit
+                    .apply{
+                    setText(doc["tin"]!!.toString())
+                    isEnabled = false
+                }
+                etNumberCompany
+                    .apply {
+                        setText(doc["phoneNumber"]!!.toString())
+                        isEnabled = false
+                    }
+                etLrLastnameCompany
+                    .apply {
+                        setText(doc["lrLastName"]!!.toString())
+                        isEnabled = false
+                    }
+                etLrNameCompany
+                    .apply {
+                        setText(doc["lrName"]!!.toString())
+                        isEnabled = false
+                    }
+                etEmailCompany
+                    .apply {
+                        setText(doc["email"]!!.toString())
+                        isEnabled = false
+                    }
+
+                InputAnimator.initializeAnimations(
+                    this,
+                    etNameCompany,
+                    tvNameCompany,
+                    viewNameCompany
+                )
+                InputAnimator.initializeAnimations(this, etNit, tvNit, viewNit)
+                InputAnimator.initializeAnimations(
+                    this,
+                    etNumberCompany,
+                    tvNumberCompany,
+                    viewNumberCompany
+                )
+                InputAnimator.initializeAnimations(
+                    this,
+                    etLrNameCompany,
+                    tvLrNameCompany,
+                    viewLrNameCompany
+                )
+                InputAnimator.initializeAnimations(
+                    this,
+                    etLrLastnameCompany,
+                    tvLrLastnameCompany,
+                    viewLrLastnameCompany
+                )
+                InputAnimator.initializeAnimations(
+                    this,
+                    etEmailCompany,
+                    tvEmailCompany,
+                    viewEmailCompany
+                )
+                InputAnimator.initializeAnimations(
+                    this,
+                    etPassCompany,
+                    tvPassCompany,
+                    viewPassCompany
+                )
+                InputAnimator.initializeAnimations(
+                    this,
+                    etConfirmPassCompany,
+                    tvConfirmPassCompany,
+                    viewConfirmPassCompany
+                )
+
+                if(uid != null){
+                    findViewById<FrameLayout>(R.id.confirmGroup).visibility = View.GONE
+                    findViewById<FrameLayout>(R.id.passwordGroup).visibility = View.GONE
+                    findViewById<ImageView>(R.id.UpdateButton).visibility = View.GONE
+                }
+
+            }
+
+
+    }
 
 }

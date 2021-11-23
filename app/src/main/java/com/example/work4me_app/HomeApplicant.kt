@@ -3,15 +3,15 @@ package com.example.work4me_app
 import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.tasks.Task
@@ -25,6 +25,9 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
+import com.mapbox.navigation.ui.utils.internal.extensions.getBitmap
+import java.io.InputStream
+import java.net.URL
 
 class HomeApplicant : AppCompatActivity() {
 
@@ -67,6 +70,20 @@ class HomeApplicant : AppCompatActivity() {
                 findViewById<TextView>(R.id.nameAppbar).text = doc!!["name"]
                     .toString()
                     .replaceFirstChar { it.uppercase() }
+
+                if(doc["profile_picture"] != null){
+                    AsyncTask.execute {
+                        val url: URL = URL(doc["profile_picture"].toString())
+
+                        val content: InputStream = url.content as InputStream
+                        val drawable: Drawable = Drawable.createFromStream(content, "src")
+
+                        runOnUiThread {
+
+                            findViewById<ImageView>(R.id.userPreview).setImageDrawable(BitmapDrawable(Convertions.getRoundedCroppedBitmap(drawable.getBitmap())))
+                        }
+                    }
+                }
             }
 
         recycler = findViewById<RecyclerView>(R.id.lvFeed)
@@ -156,7 +173,10 @@ class HomeApplicant : AppCompatActivity() {
                 if(result.contents == null){
                     Toast.makeText(this, "Code reader was cancel", Toast.LENGTH_SHORT).show()
                 }else{
-                    Toast.makeText(this, result.contents, Toast.LENGTH_SHORT).show()
+
+                    val intent : Intent = Intent(this, profile_company::class.java)
+                    intent.putExtra("companyUid", result.contents.toString())
+                    startActivity(intent)
                 }
             }else{
                 Toast.makeText(this, "empty", Toast.LENGTH_SHORT).show()

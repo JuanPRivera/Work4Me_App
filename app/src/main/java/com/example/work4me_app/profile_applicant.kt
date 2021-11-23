@@ -2,6 +2,8 @@ package com.example.work4me_app
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.*
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
@@ -11,12 +13,15 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.work4me_app.Convertions.Companion.getRoundedCroppedBitmap
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
+import com.mapbox.navigation.ui.utils.internal.extensions.getBitmap
 import java.io.InputStream
 import java.net.URL
+
 
 class profile_applicant : AppCompatActivity() {
 
@@ -128,7 +133,7 @@ class profile_applicant : AppCompatActivity() {
 
                 findViewById<EditText>(R.id.editTextIdPrApp)
                     .apply {
-                        setText(doc!!["name"].toString())
+                        setText(doc!!["id"].toString())
                         isEnabled = false
                     }
                 findViewById<EditText>(R.id.editTextCityPrApp)
@@ -152,16 +157,18 @@ class profile_applicant : AppCompatActivity() {
                         isEnabled = false
                     }
 
-                AsyncTask.execute(object : Runnable {
-                    override fun run() {
-                        val url : URL = URL(doc!!["profile_picture"].toString())
+                if(doc!!["profile_picture"] != null){
+                    AsyncTask.execute {
+                        val url: URL = URL(doc!!["profile_picture"].toString())
 
-                        val content : InputStream = url.content as InputStream
-                        val drawable : Drawable = Drawable.createFromStream(content, "src")
-                        profileImage.setImageDrawable(drawable)
+                        val content: InputStream = url.content as InputStream
+                        val drawable: Drawable = Drawable.createFromStream(content, "src")
+
+                        runOnUiThread {
+                            profileImage.setImageDrawable(BitmapDrawable(Convertions.getRoundedCroppedBitmap(drawable.getBitmap())))
+                        }
                     }
-
-                })
+                }
 
 
 
