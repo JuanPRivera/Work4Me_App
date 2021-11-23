@@ -110,7 +110,7 @@ class HomeApplicant : AppCompatActivity() {
                                             doc["job"].toString(),
                                             doc["description"].toString(),
                                             doc["salary"].toString().toInt(),
-                                            Company(company!!["companyName"].toString(), company!!["companyUid"].toString())
+                                            Company(company!!["companyName"].toString(), company!!["uid"].toString(), company!!["profilePicture"].toString())
                                         )
                                     )
 

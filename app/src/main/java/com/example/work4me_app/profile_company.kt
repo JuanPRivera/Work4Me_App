@@ -1,7 +1,12 @@
 package com.example.work4me_app
 
+import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
@@ -10,6 +15,9 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.mapbox.navigation.ui.utils.internal.extensions.getBitmap
+import java.io.InputStream
+import java.net.URL
 
 class profile_company : AppCompatActivity() {
 
@@ -50,6 +58,8 @@ class profile_company : AppCompatActivity() {
     private lateinit var tvConfirmPassCompany : TextView
     private lateinit var viewConfirmPassCompany : View
 
+    private lateinit var profileImage : ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_company)
@@ -86,8 +96,12 @@ class profile_company : AppCompatActivity() {
         tvConfirmPassCompany = findViewById<TextView>(R.id.textViewConfirmNewPassPrComp)
         viewConfirmPassCompany = findViewById<View>(R.id.viewBluePassword)
 
+        profileImage = findViewById<ImageView>(R.id.profilePic)
+
+        Log.d("companyUid", "${intent.getStringExtra("companyUid")}")
         if(intent.getStringExtra("companyUid") != null){
             setData(intent.getStringExtra("companyUid").toString())
+
         }
 
 
@@ -183,6 +197,29 @@ class profile_company : AppCompatActivity() {
                     findViewById<FrameLayout>(R.id.confirmGroup).visibility = View.GONE
                     findViewById<FrameLayout>(R.id.passwordGroup).visibility = View.GONE
                     findViewById<ImageView>(R.id.UpdateButton).visibility = View.GONE
+                }
+
+                findViewById<ImageView>(R.id.getLocation).setOnClickListener{_:View ->
+                    val intent : Intent = Intent(this, MapActivity::class.java)
+                    intent.putExtra("companyUid", search)
+                    startActivity(intent)
+                }
+
+                findViewById<ImageView>(R.id.imageViewReturn).setOnClickListener{_:View ->
+                    finish()
+                }
+
+                if(doc!!["profilePicture"] != null){
+                    AsyncTask.execute {
+                        val url: URL = URL(doc!!["profilePicture"].toString())
+
+                        val content: InputStream = url.content as InputStream
+                        val drawable: Drawable = Drawable.createFromStream(content, "src")
+
+                        runOnUiThread {
+                            profileImage.setImageDrawable(BitmapDrawable(Convertions.getRoundedCroppedBitmap(drawable.getBitmap())))
+                        }
+                    }
                 }
 
             }

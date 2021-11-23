@@ -2,7 +2,10 @@ package com.example.work4me_app
 
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
+import android.os.AsyncTask
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +16,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import android.os.Bundle
-
-
+import com.mapbox.navigation.ui.utils.internal.extensions.getBitmap
+import java.io.InputStream
+import java.net.URL
 
 
 class ApplicantFeedAdapter(context: HomeApplicant, jobs: ArrayList<Job>) : RecyclerView.Adapter<ApplicantFeedAdapter.ViewHolder>() {
@@ -30,6 +34,7 @@ class ApplicantFeedAdapter(context: HomeApplicant, jobs: ArrayList<Job>) : Recyc
         val jobDescription : TextView = view.findViewById<TextView>(R.id.tvDescription)
         val companyName : TextView = view.findViewById<TextView>(R.id.tvCompanyName)
         val applyButton : TextView = view.findViewById<TextView>(R.id.applyBtn)
+        val profilePic : ImageView = view.findViewById<ImageView>(R.id.companyProfilePicture)
 
     }
 
@@ -55,6 +60,24 @@ class ApplicantFeedAdapter(context: HomeApplicant, jobs: ArrayList<Job>) : Recyc
         holder.jobSalary.text = formatPrice(this._jobs[position].getSalary())
         holder.jobDescription.text = this._jobs[position].getDescription()
         holder.companyName.text = this._jobs[position].getCompany().getCompanyName()
+        if(this._jobs[position].getCompany().getPictureUrl() != null){
+            AsyncTask.execute {
+                val url: URL = URL(this._jobs[position].getCompany().getPictureUrl())
+
+                val content: InputStream = url.content as InputStream
+                val drawable: Drawable = Drawable.createFromStream(content, "src")
+
+                _context.runOnUiThread {
+                   holder.profilePic.setImageDrawable(BitmapDrawable(Convertions.getRoundedCroppedBitmap(drawable.getBitmap())))
+                }
+            }
+        }
+
+        holder.profilePic.setOnClickListener{_:View ->
+            val intent : Intent = Intent(_context, profile_company::class.java)
+            intent.putExtra("companyUid",this._jobs[position].getCompany().getCompanyUid())
+            _context.startActivity(intent)
+        }
     }
 
     private fun formatPrice(price:Int):String{

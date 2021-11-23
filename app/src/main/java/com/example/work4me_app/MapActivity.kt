@@ -138,7 +138,7 @@ class MapActivity : AppCompatActivity() {
         FirebaseFirestore
             .getInstance()
             .collection("users")
-            .whereEqualTo("uid", "3S2fXe7gwXTfMRnwcRiIEDz1c1h2")
+            .whereEqualTo("uid", intent.getStringExtra("companyUid"))
             .get()
             .addOnSuccessListener { querySnapshot : QuerySnapshot ->
                 if (querySnapshot.size() > 0){

@@ -13,15 +13,17 @@ class Convertions {
         }
         fun getRoundedCroppedBitmap(bitmap: Bitmap): Bitmap? {
             val widthLight = bitmap.width
+            val heightLight = bitmap.height
+            val size = if (widthLight < heightLight ) widthLight else heightLight
             val output = Bitmap.createBitmap(
-                bitmap.width, bitmap.height,
+                size, size,
                 Bitmap.Config.ARGB_8888
             )
             val canvas = Canvas(output)
             val paintColor = Paint()
             paintColor.setFlags(Paint.ANTI_ALIAS_FLAG)
-            val rectF = RectF(Rect(0, 0, widthLight, widthLight))
-            canvas.drawRoundRect(rectF, widthLight / 2f, widthLight / 2f, paintColor)
+            val rectF = RectF(Rect(0, 0, size, size))
+            canvas.drawRoundRect(rectF, size / 2f, size / 2f, paintColor)
             val paintImage = Paint()
             paintImage.setXfermode(PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP))
             canvas.drawBitmap(bitmap, 0f, 0f, paintImage)

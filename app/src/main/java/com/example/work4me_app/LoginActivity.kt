@@ -12,6 +12,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -24,6 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.messaging.FirebaseMessaging
 import org.w3c.dom.Text
 
 class LoginActivity : AppCompatActivity() {
@@ -39,6 +41,17 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_activity)
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("TokenFail", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+
+            Log.d("token", task.result)
+            Toast.makeText(baseContext, R.string.msg_token_fmt, Toast.LENGTH_SHORT).show()
+        })
 
         auth = Firebase.auth
 
